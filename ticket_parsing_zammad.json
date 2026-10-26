@@ -1,0 +1,1031 @@
+{
+  "name": "Ticket parsing copy eng",
+  "nodes": [
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "30feab6f-bc51-4126-86bd-4ed4f025ae05",
+              "leftValue": "={{ $json.priority_id }}",
+              "rightValue": 3,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "21e1c4ec-7ba1-445b-836c-643be6746bc2",
+              "leftValue": "={{ $json.priority_id }}",
+              "rightValue": 4,
+              "operator": {
+                "type": "number",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1024,
+        -176
+      ],
+      "id": "f8b1b477-d68a-451f-b71d-6d4c5c313eda",
+      "name": "If prio = crit/high"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "4fa865df-0301-40f3-9714-f0a1868fb4c0",
+              "leftValue": "={{ $json.to }}",
+              "rightValue": "CoworkerZammadHandler",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            },
+            {
+              "id": "7c477fdf-d318-401f-b4e3-84f60089e5e2",
+              "leftValue": "={{ $json.from }}",
+              "rightValue": "\\\"Helpdesk CompanyName\\\" <email@example.com>",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        880,
+        -48
+      ],
+      "id": "14fb179a-8a3e-4e34-bf37-161c589b5652",
+      "name": "If not TO coworker"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('If not TO coworker').item.json.priority_id }}",
+                    "rightValue": 4,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    },
+                    "id": "10586db6-c160-42f7-9420-65163e7563da"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "bd9ab80f-9b28-41a6-a6d0-7ee797b94af3",
+                    "leftValue": "={{ $('If not TO coworker').item.json.priority_id }}",
+                    "rightValue": 3,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1216,
+        -208
+      ],
+      "id": "0603d0f4-e1a6-4ed6-b7d3-0e4a64653351",
+      "name": "crit/high switch route"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('If not TO coworker').item.json.priority_id }}",
+                    "rightValue": 1,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    },
+                    "id": "8ef97c49-f216-4457-a338-55d50b96d42f"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "09b35264-53c2-400c-a89f-d1754f777594",
+                    "leftValue": "={{ $('If not TO coworker').item.json.priority_id }}",
+                    "rightValue": 2,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "0e48941b-120d-4153-b694-4cf43066e1f0",
+                    "leftValue": "={{ $('If not TO coworker').item.json.priority_id }}",
+                    "rightValue": 3,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "085c4ca6-b608-422b-bf1e-34c717081746",
+                    "leftValue": "={{ $('If not TO coworker').item.json.priority_id }}",
+                    "rightValue": 4,
+                    "operator": {
+                      "type": "number",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1200,
+        96
+      ],
+      "id": "ba00a51e-3363-4838-94b9-aca9661b603c",
+      "name": "prio Switch route"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return {\n  priority: ({\n    4: \"CRITICAL\",\n    3: \"HIGH\",\n    2: \"NORMAL\",\n    1: \"LOW\"\n  })[Number($json.priority_id)] || \"UNKNOWN\",\n\n  customer_priority: $json.customer_priority || \"none\",\n\n  title: `[${$json.id}] ${$json.title}`,\n\n  message: $json.body,\n\n  from: $json.from,\n  to: $json.to,\n  updated: $json.updated_at\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        128
+      ],
+      "id": "5265a768-b6ec-4c49-b4d2-caf0e41d5d71",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ntfy.sh/your_url",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $json.priority }} "
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "text",
+        "body": "={{ $json.title }}\nPrzypisano do: {{ $json.to }}\nZgłaszający: {{ $json.from }}\nTreść: {{ $json.message }}\nAktualizacja: {{ new Date($json.updated).toLocaleString('pl-PL', { timeZone: 'Europe/Warsaw' }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1520,
+        -320
+      ],
+      "id": "92b8f495-95a2-42b9-b047-ef60b734d4af",
+      "name": "POST critical priv"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return {\n  priority: ({\n    4: \"CRITICAL\",\n    3: \"HIGH\",\n    2: \"NORMAL\",\n    1: \"LOW\"\n  })[Number($json.priority_id)] || \"UNKNOWN\",\n\n  customer_priority: $json.customer_priority || \"none\",\n\n  title: `[${$json.id}] ${$json.title}`,\n\n  message: $json.body,\n\n  from: $json.from,\n  to: $json.to,\n  updated: $json.updated_at\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1376,
+        -320
+      ],
+      "id": "e5b06ca6-f635-42c3-b77a-6d20ed0b896c",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return {\n  priority: ({\n    4: \"CRITICAL\",\n    3: \"HIGH\",\n    2: \"NORMAL\",\n    1: \"LOW\"\n  })[Number($json.priority_id)] || \"UNKNOWN\",\n\n  customer_priority: $json.customer_priority || \"none\",\n\n  title: `[${$json.id}] ${$json.title}`,\n\n  message: $json.body,\n\n  from: $json.from,\n  to: $json.to,\n  updated: $json.updated_at\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1376,
+        -144
+      ],
+      "id": "80037e39-8750-40de-9dc7-85337dbbfd46",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return {\n  priority: ({\n    4: \"CRITICAL\",\n    3: \"HIGH\",\n    2: \"NORMAL\",\n    1: \"LOW\"\n  })[Number($json.priority_id)] || \"UNKNOWN\",\n\n  customer_priority: $json.customer_priority || \"none\",\n\n  title: `[${$json.id}] ${$json.title}`,\n\n  message: $json.body,\n\n  from: $json.from,\n  to: $json.to,\n  updated: $json.updated_at\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        0
+      ],
+      "id": "5b267149-1b50-4ff2-b1c9-31ea96f7dcc9",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return {\n  priority: ({\n    4: \"CRITICAL\",\n    3: \"HIGH\",\n    2: \"NORMAL\",\n    1: \"LOW\"\n  })[Number($json.priority_id)] || \"UNKNOWN\",\n\n  customer_priority: $json.customer_priority || \"none\",\n\n  title: `[${$json.id}] ${$json.title}`,\n\n  message: $json.body,\n\n  from: $json.from,\n  to: $json.to,\n  updated: $json.updated_at\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        240
+      ],
+      "id": "160d9b22-5242-474c-95c8-b6a63369a95f",
+      "name": "Code in JavaScript4"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return {\n  priority: ({\n    4: \"CRITICAL\",\n    3: \"HIGH\",\n    2: \"NORMAL\",\n    1: \"LOW\"\n  })[Number($json.priority_id)] || \"UNKNOWN\",\n\n  customer_priority: $json.customer_priority || \"none\",\n\n  title: `[${$json.id}] ${$json.title}`,\n\n  message: $json.body,\n\n  from: $json.from,\n  to: $json.to,\n  updated: $json.updated_at\n}"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1360,
+        384
+      ],
+      "id": "3796eaa7-5253-4bac-a333-5762b2e9229a",
+      "name": "Code in JavaScript5"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ntfy.sh/your_url",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $json.priority }} "
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "text",
+        "body": "={{ $json.title }}\nPrzypisano do: {{ $json.to }}\nZgłaszający: {{ $json.from }}\nTreść: {{ $json.message }}\nAktualizacja: {{ new Date($json.updated).toLocaleString('pl-PL', { timeZone: 'Europe/Warsaw' }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1520,
+        -160
+      ],
+      "id": "a76d8b25-98b9-4d6b-a989-4b7f753a958c",
+      "name": "POST high priv"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ntfy.sh/your_url",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $json.priority }} "
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "text",
+        "body": "={{ $json.title }}\nPrzypisano do: {{ $json.to }}\nZgłaszający: {{ $json.from }}\nTreść: {{ $json.message }}\nAktualizacja: {{ new Date($json.updated).toLocaleString('pl-PL', { timeZone: 'Europe/Warsaw' }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1520,
+        -16
+      ],
+      "id": "e1258c22-b78f-48a0-bdef-fb1212a8c23d",
+      "name": "POST low"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ntfy.sh/your_url",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $json.priority }} "
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "text",
+        "body": "={{ $json.title }}\nPrzypisano do: {{ $json.to }}\nZgłaszający: {{ $json.from }}\nTreść: {{ $json.message }}\nAktualizacja: {{ new Date($json.updated).toLocaleString('pl-PL', { timeZone: 'Europe/Warsaw' }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1520,
+        112
+      ],
+      "id": "6c6d4060-60b2-4093-9974-2ad682a5e6a4",
+      "name": "POST normal"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ntfy.sh/your_url",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $json.priority }} "
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "text",
+        "body": "={{ $json.title }}\nPrzypisano do: {{ $json.to }}\nZgłaszający: {{ $json.from }}\nTreść: {{ $json.message }}\nAktualizacja: {{ new Date($json.updated).toLocaleString('pl-PL', { timeZone: 'Europe/Warsaw' }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1520,
+        272
+      ],
+      "id": "8b1db90b-a02a-4fcf-8b5d-3abce69da9ae",
+      "name": "POST high"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ntfy.sh/your_url",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "title",
+              "value": "={{ $json.priority }} "
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "text",
+        "body": "={{ $json.title }}\nPrzypisano do: {{ $json.to }}\nZgłaszający: {{ $json.from }}\nTreść: {{ $json.message }}\nAktualizacja: {{ new Date($json.updated).toLocaleString('pl-PL', { timeZone: 'Europe/Warsaw' }) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1520,
+        416
+      ],
+      "id": "314397b1-e25c-4adf-ae7f-59cd241d1078",
+      "name": "POST critical"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            },
+            {
+              "field": "="
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "126038c9-6745-4744-8b6c-e25f2ca5181a",
+      "name": "every 1 min"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1936e87e-3fb2-4237-a20e-6a852ca378a0",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "number"
+            },
+            {
+              "id": "455265e0-38f1-4571-b595-67cb211e5d02",
+              "name": "title",
+              "value": "={{ $json.title }}",
+              "type": "string"
+            },
+            {
+              "id": "76acbe5c-aff3-48c2-9bb9-af6038c03fef",
+              "name": "customer_priority",
+              "value": "={{ $json.customer_priority }}",
+              "type": "array"
+            },
+            {
+              "id": "74c14f5b-19d0-4ca6-9383-50ce7f0fa8b7",
+              "name": "priority_id",
+              "value": "={{ $json.priority_id }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        304,
+        -160
+      ],
+      "id": "e71b94a9-9f2f-469a-9220-a01ea86ec50c",
+      "name": "extracting id,title and priority"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "cfd8f0fd-ab91-493c-9556-6e14420d07f8",
+              "name": "ticket_id",
+              "value": "={{ $json.ticket_id }}",
+              "type": "number"
+            },
+            {
+              "id": "ec1e483e-8a7b-4155-b53f-d502ab76eb24",
+              "name": "from",
+              "value": "={{ $json.from }}",
+              "type": "string"
+            },
+            {
+              "id": "9a46e474-d4e0-4186-8431-bd68edf950ec",
+              "name": "to",
+              "value": "={{ $json.to }}",
+              "type": "string"
+            },
+            {
+              "id": "5774ef73-5062-4987-be5d-e52d8e9dafd9",
+              "name": "body",
+              "value": "={{ $json.body }}",
+              "type": "string"
+            },
+            {
+              "id": "30d58388-0cba-4854-a4b1-3a9ca523b956",
+              "name": "created_at",
+              "value": "={{ $json.created_at }}",
+              "type": "string"
+            },
+            {
+              "id": "f36bfb34-2c3c-4c4f-b437-f3688a26da78",
+              "name": "updated_at",
+              "value": "={{ $json.updated_at }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        464,
+        64
+      ],
+      "id": "d5dd1d73-ae40-4802-aed0-77e7fb5bb51a",
+      "name": "extracting content,author,date of submission"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "advanced": true,
+        "mergeByFields": {
+          "values": [
+            {
+              "field1": "id",
+              "field2": "ticket_id"
+            }
+          ]
+        },
+        "joinMode": "enrichInput1",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        560,
+        -144
+      ],
+      "id": "573e75d7-cf78-4432-b654-8bb793b7b341",
+      "name": "connecting topic and priority with contents and author by id"
+    },
+    {
+      "parameters": {
+        "url": "https://zammaddomain.example/api/v1/tickets/search?query=created_at:>now-70s",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Token token=00000000asdASD"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        160,
+        -96
+      ],
+      "id": "1ee779d5-ba29-4658-8f19-f9cba79fbf23",
+      "name": "GET; getting IDs of new tickets"
+    },
+    {
+      "parameters": {
+        "url": "=https://zammaddomain.example/api/v1/ticket_articles/by_ticket/{{$json[\"id\"]}}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Token token=000000asdASD"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        320,
+        64
+      ],
+      "id": "fdd4d35a-19da-4717-adf7-15f1e4954101",
+      "name": "GET; extracting content of the ticket"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "8b412d16-5e6d-4a91-9fe3-ef2b8fa0f8ea",
+              "leftValue": "={{ $json.from }}",
+              "rightValue": "=\"Helpedsk CompanyName \" <email@example.com>",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        736,
+        -144
+      ],
+      "id": "de767f50-e148-4438-8a90-b0bf0390fd67",
+      "name": "Filter out; answer from service to client"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "89763e3a-2177-48f4-ae1e-c4e1144566a2",
+              "leftValue": "={{\n(() => {\n  const now = new Date();\n\n  const warsaw = new Date(\n    now.toLocaleString('en-US', { timeZone: 'Europe/Warsaw' })\n  );\n\n  const day = warsaw.getDay();   // 0=Sun, 1=Mon ... 6=Sat\n  const hour = warsaw.getHours();\n\n  return day >= 1 && day <= 5 && hour >= 7 && hour < 15;\n})()\n}}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1056,
+        16
+      ],
+      "id": "d77ad427-03c2-4d65-a311-12c167ffc675",
+      "name": "If monday-friday 7-15",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "content": "you have to change some domains etc. for it to work so check every box and make sufficient changes\n"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        656,
+        112
+      ],
+      "typeVersion": 1,
+      "id": "2c93d0b7-3e62-4dc6-a2ea-5c0e11a77683",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "If prio = crit/high": {
+      "main": [
+        [
+          {
+            "node": "crit/high switch route",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "If not TO coworker": {
+      "main": [
+        [
+          {
+            "node": "If prio = crit/high",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If monday-friday 7-15",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "crit/high switch route": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "prio Switch route": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code in JavaScript5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "POST normal",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "POST critical priv",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "POST high priv",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "POST low",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript4": {
+      "main": [
+        [
+          {
+            "node": "POST high",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript5": {
+      "main": [
+        [
+          {
+            "node": "POST critical",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "every 1 min": {
+      "main": [
+        [
+          {
+            "node": "GET; getting IDs of new tickets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extracting id,title and priority": {
+      "main": [
+        [
+          {
+            "node": "GET; extracting content of the ticket",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "connecting topic and priority with contents and author by id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "extracting content,author,date of submission": {
+      "main": [
+        [
+          {
+            "node": "connecting topic and priority with contents and author by id",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "connecting topic and priority with contents and author by id": {
+      "main": [
+        [
+          {
+            "node": "Filter out; answer from service to client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET; getting IDs of new tickets": {
+      "main": [
+        [
+          {
+            "node": "extracting id,title and priority",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GET; extracting content of the ticket": {
+      "main": [
+        [
+          {
+            "node": "extracting content,author,date of submission",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter out; answer from service to client": {
+      "main": [
+        [
+          {
+            "node": "If not TO coworker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If monday-friday 7-15": {
+      "main": [
+        [
+          {
+            "node": "prio Switch route",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": false
+  },
+  "versionId": "0ee75fc3-0a70-492c-82d6-4b55eddec4b5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b67b41206302bc7234fa6c9c050fb11ec4dd69ce5cb7e57e063ac63e5c8533e1"
+  },
+  "id": "LReNzutUczXByXtr",
+  "tags": []
+}
